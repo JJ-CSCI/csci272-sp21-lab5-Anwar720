@@ -5,6 +5,63 @@
 //------------------------------
 
 // Write the assignment code here
+class Real{
+  private:
+  double re;
+
+  public:
+  Real(double);
+  double GetReal();
+  Real friend operator* (Real&, double );
+
+};
+Real::Real(double a): re{a}{}
+
+double Real::GetReal(){ return re;}
+
+Real operator*(Real& r, double m){
+   return r.re * m;
+}
+
+// complex class
+class Complex : public Real{
+  private:
+  double im;
+  
+  public:
+  Complex(double , double);
+  double GetImaginary( );
+  Complex  operator* (double );
+};
+  Complex::Complex(double a, double b): Real{a}, im{b} { }
+
+  double Complex::GetImaginary(){ return im;}
+
+  Complex Complex::operator*(double m){
+   Complex com(GetReal()*m,im*2);
+   return com;
+  }
+
+  //Surreal class
+  class Surreal: public Complex{
+
+    private:
+    double sur;
+
+    public:
+    Surreal( double , double ,double );
+    double GetSurreal();
+    Surreal  operator*(double);
+  };
+    Surreal::Surreal( double a ,double b ,double c): 
+     Complex{a,b}, sur{c}{} 
+
+    double Surreal::GetSurreal(){ return sur;}
+
+    Surreal  Surreal::operator*(double m){
+      Surreal s(GetReal()*m,GetImaginary()*m,sur*m);
+      return s;
+    }
 
 
 //------------------------------
